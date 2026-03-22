@@ -1,0 +1,17 @@
+FROM jenkins/jenkins:lts
+
+USER root
+
+# Install Node.js
+RUN apt-get update && apt-get install -y curl gnupg \
+ && curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
+ && apt-get install -y nodejs
+
+# Install Docker CLI
+RUN apt-get install -y docker.io
+
+# Install kubectl
+RUN curl -LO "https://dl.k8s.io/release/v1.29.0/bin/linux/amd64/kubectl" \
+ && install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+
+USER jenkins
