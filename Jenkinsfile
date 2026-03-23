@@ -3,25 +3,20 @@ pipeline {
 
     stages {
 
-        stage('Build Backend') {
+        stage('Clone Code') {
             steps {
-                dir('backend') {
-                    sh 'npm install'
-                }
+                git 'YOUR_GITHUB_REPO_URL'
             }
         }
 
-        stage('Build Frontend') {
-            steps {
-                dir('frontend') {
-                    sh 'npm install'
-                }
-            }
-        }
-
-        stage('Build Docker Images') {
+        stage('Build Backend Image') {
             steps {
                 sh 'docker build -t backend-app ./backend'
+            }
+        }
+
+        stage('Build Frontend Image') {
+            steps {
                 sh 'docker build -t frontend-app ./frontend'
             }
         }
