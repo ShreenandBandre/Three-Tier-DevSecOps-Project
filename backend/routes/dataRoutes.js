@@ -1,22 +1,9 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const SensorData = require('../models/SensorData');
 
-// POST data
-router.post('/add', async (req, res) => {
-  try {
-    const data = new SensorData(req.body);
-    await data.save();
-    res.status(201).json(data);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
+const { getData, addData } = require("../controllers/dataController");
 
-// GET data
-router.get('/', async (req, res) => {
-  const data = await SensorData.find().sort({ createdAt: -1 });
-  res.json(data);
-});
+router.get("/", getData);
+router.post("/", addData);
 
 module.exports = router;
