@@ -8,12 +8,6 @@ pipeline {
 
     stages {
 
-        stage('Clone Code') {
-            steps {
-                git 'https://github.com/ShreenandBandre/Three-Tier-DevSecOps-Project.git'
-            }
-        }
-
         stage('Build Backend Docker Image') {
             steps {
                 sh 'docker build -t $DOCKER_IMAGE_BACKEND ./backend'
